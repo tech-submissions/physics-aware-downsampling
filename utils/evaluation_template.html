@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Evaluation Viewer</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    .main {
+      padding: 30px 50px;
+    }
+    .image {
+        width: 512px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <h2> {{title}} </h2>
+    <div>
+      <table class="mdl-data-table mdl-js-data-table" aria-label="Sample Configuration">
+          <thead>
+            <tr class="mdc-data-table__header-row">
+              <th role="columnheader" scope="col">Sample ID</th>
+              <th role="columnheader" scope="col">Loss</th>
+              <th role="columnheader" scope="col">Model DEM</th>
+              <th role="columnheader" scope="col">Baseline DEM</th>
+              <th role="columnheader" scope="col">Model - Ground Truth Difference Map</th>
+              <th role="columnheader" scope="col">Model Solution</th>
+                <th role="columnheader" scope="col">Ground Truth Coarse
+                    Solution
+                </th>
+            </tr>
+          </thead>
+          <tbody class="mdc-data-table__content">
+            {% for sample in samples %}
+              <tr>
+                <td>{{ sample.sample_id }}</td>
+                <td>{{ '%2.4f' % sample.loss }}</td>
+                <td>
+                  <img class="image" alt="Model DEM" src="data:image/png;base64,{{sample.model_dem | safe}}">
+                </td>
+                <td>
+                  <img class="image" alt="Baseline DEM" src="data:image/png;base64,{{sample.baseline_dem | safe}}">
+                </td>
+                <td>
+                  <img class="image" alt="Model-GT Diff" src="data:image/png;base64,{{sample.model_gt_difference | safe}}">
+                </td>
+                <td>
+                  <img class="image" alt="Model Solution" src="data:image/png;base64,{{sample.model_solution | safe}}">
+                </td>
+                <td>
+                    <img class="image" alt="Ground Truth Coarse Solution"
+                         src="data:image/png;base64,{{sample.baseline_solution | safe}}">
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <footer>{{ command }}</footer>
+    </div>
+  </div>
+</body>
+</html>
