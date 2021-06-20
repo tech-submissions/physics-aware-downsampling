@@ -5,6 +5,7 @@ This code was used to implement: Physics-Aware Downsampling with Deep Learning f
 ## Dependencies
 ```
 pip install -r requirements.txt
+pip install tensorboard
 ```
 
 ## Data
