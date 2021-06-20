@@ -9,7 +9,16 @@ pip install -r requirements.txt
 
 ## Data
 
-- Configure your dataset path at **data.py**.
+The data size (+source files) is around ~300GB.
+### Downloading data
+1. The source files are listed in the **source** directory. Run the following command to download tif source files:
+```
+wget -i source/001/ned232_20200818_172734.txt -P /home/usgs_dem_data_source/001
+wget -i source/002/ned69_20200818_175155.txt -P /home/usgs_dem_data_source/002
+wget -i source/003/ned173_20200818_174748.txt -P /home/usgs_dem_data_source/003
+```
+2. After the tif files are downloaded, run **source.py** (under **source** directory). This will process the source files and construct an index for the dataset.
+3. Lastly, run **ground_truth.py** to calculate fine resolution hydraulic solutions. To save time, the calculation is done in parallel. Configure the number of GPUs to use in **ground_truth.py**.
 
 ## Example
 
